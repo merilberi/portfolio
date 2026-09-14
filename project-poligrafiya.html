@@ -160,15 +160,14 @@ body{
   footer{ padding: 28px 24px; text-align:center; font-size: .85rem; color: var(--muted); }
   footer a{ text-decoration:none; }
   footer a:hover{ color: var(--ink); }
-  .fan-section {
+ .fan-section {
   position: relative;
   width: 100%;
-  height: 480px; /* Висота під весь віяловий блок */
+  height: 420px;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: visible;
-  margin-top: 10px; /* Невеликий відступ від хедера */
 }
 
 .cards-fan {
@@ -177,47 +176,47 @@ body{
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 1000px;
+  height: 100%;
 }
 
-/* Загальний стиль для кожної картки (прямокутники з тінню) */
+/* Загальний стиль карток */
 .cards-fan .card {
   position: absolute;
-  width: 210px;
-  height: 280px;
+  width: 190px;
+  height: 260px;
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
 
-/* Точне положення та нахил кожного елемента віяла як на макеті */
+/* Ширший розліт карток, щоб вони утворили справжнє віяло */
 .cards-fan .card:nth-child(1) {
-  transform: translateX(-240px) translateY(25px) rotate(-12deg);
+  transform: translateX(-310px) translateY(25px) rotate(-14deg);
   z-index: 1;
 }
 
 .cards-fan .card:nth-child(2) {
-  transform: translateX(-120px) translateY(10px) rotate(-6deg);
+  transform: translateX(-160px) translateY(10px) rotate(-7deg);
   z-index: 2;
 }
 
-/* Центральна винесена вище і без нахилу */
+/* Центральна картка (головна) */
 .cards-fan .card.main-card {
-  width: 230px;
-  height: 310px;
-  transform: translateX(0) translateY(-25px) rotate(0deg);
+  width: 210px;
+  height: 290px;
+  transform: translateX(0) translateY(-20px) rotate(0deg);
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
   z-index: 5;
 }
 
 .cards-fan .card:nth-child(4) {
-  transform: translateX(120px) translateY(10px) rotate(6deg);
+  transform: translateX(160px) translateY(10px) rotate(7deg);
   z-index: 2;
 }
 
 .cards-fan .card:nth-child(5) {
-  transform: translateX(240px) translateY(25px) rotate(12deg);
+  transform: translateX(310px) translateY(25px) rotate(14deg);
   z-index: 1;
 }
 </style>
