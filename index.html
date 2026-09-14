@@ -32,15 +32,11 @@
     *{ animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
   }
 
-  body{
-    margin:0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--font-body);
-    font-size: 18px;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-  }
+    body {
+  margin: 0;
+  background: transparent !important; /* Ось тут ставимо прозорість, щоб хмари було видно */
+  color: var(--ink);
+}
 
   h1,h2,h3{
     font-family: var(--font-display);
@@ -549,4 +545,28 @@
 </main>
 
 <footer class="wrap">
+  </footer>
+    
+    <!-- Підключаємо Vanta.js для хмар -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.clouds.min.js"></script>
+    <script>
+    VANTA.CLOUDS({
+      el: "body",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      skyColor: 0xa1b3c5,
+      cloudColor: 0xa7afc8,
+      cloudShadowColor: 0x7a98b9,
+      sunColor: 0xaa4e70,
+      sunGlareColor: 0xfff6b3f,
+      sunlightColor: 0xe89467,
+      speed: 0.50
+    })
+    </script>
+</body>
+</html>
   <div>© 2026
