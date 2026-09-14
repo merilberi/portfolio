@@ -220,25 +220,26 @@ body{
     }
   })();
 </script>
-<!-- Підключаємо надійні посилання на Three.js та Vanta Fog -->
+<!-- Підключаємо Three.js та Vanta.js (Fog) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
 <script>
 window.addEventListener('DOMContentLoaded', () => {
   VANTA.FOG({
     el: "body",
-   mouseControls: true,
-  touchControls: true,
-  gyroControls: false,
-  minHeight: 200.00,
-  minWidth: 200.00,
-  highlightColor: 0xffffff,
-  midtoneColor: 0xc3beba,
-  lowlightColor: 0x8a3b57,
-  baseColor: 0xded8d5,
-  blurFactor: 0.35,
-  speed: 1.10,
-  zoom: 1.20
+    mouseControls: true,
+    touchControls: true,
+    gyroControls: false,
+    minHeight: 200.00,
+    minWidth: 200.00,
+    highlightColor: 0xffffff,
+    midtoneColor: 0xc3beba,
+    lowlightColor: 0x91415e,
+    baseColor: 0xffffff,
+    blurFactor: 0.45,
+    speed: 1.10,
+    zoom: 1.28
+  });
 });
 </script>
 </body>
