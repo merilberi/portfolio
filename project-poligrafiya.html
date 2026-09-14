@@ -44,6 +44,21 @@ body{
   position: fixed; top: 16px; left: 16px; right: 16px; z-index: 100;
   display:flex; align-items:center; justify-content:space-between;
 }
+  .bar-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  font-size: 1.1rem;
+  color: #555;
+}
 .bar .back{
   background: #fff; padding: 10px 18px; border-radius: 999px;
   font-size: .9rem; text-decoration:none; color: var(--ink);
@@ -55,11 +70,18 @@ body{
   box-shadow: 0 4px 14px rgba(0,0,0,.18);
   display:block;
 }
-.bar-tag{
-  position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
-  background: #fff; padding: 4px 12px; border-radius: 6px;
-  font-size: .75rem; white-space: nowrap;
-  box-shadow: 0 2px 6px rgba(0,0,0,.14);
+.bar-tag {
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 8px;
+  background: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
   .hero{
@@ -149,9 +171,10 @@ body{
 
 <div class="bar" id="bar">
   <a class="back" href="index.html#work">← Назад</a>
+  <div class="bar-center">÷</div>
   <div class="bar-avatar">
-    <img src="images/гранат.png" alt="Поліграфія">
-    <span class="bar-tag">поліграфія</span>
+    <img src="images/гранат.png" alt="Поіграфія">
+    <span class="bar-tag">поіграфія</span>
   </div>
 </div>
 
