@@ -70,7 +70,7 @@ body{
   .hero-media{ position:absolute; inset:0; width:100%; height:100%; object-fit: cover; }
   .hero-overlay{
     position:absolute; inset:0;
-    background: linear-gradient(180deg, rgba(22,24,26,.15) 0%, rgba(22,24,26,.75) 20%);
+  background: transparent;
   }
   .hero-content{
     position: relative; z-index: 1; color: #fff;
@@ -226,7 +226,7 @@ body{
 <script>
 VANTA.CLOUDS({
   el: "body",
-mouseControls: true,
+  mouseControls: true,
   touchControls: true,
   gyroControls: false,
   minHeight: 200.00,
@@ -235,8 +235,8 @@ mouseControls: true,
   midtoneColor: 0xd7c5c2,
   lowlightColor: 0x9d2854,
   baseColor: 0xd7cac9,
-  speed: 2.10,
-  zoom: 1.30
+  speed: 1.10,
+  zoom: 1.50
 })
 </script>
 </body>
