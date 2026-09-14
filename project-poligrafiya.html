@@ -160,7 +160,68 @@ body{
   footer{ padding: 28px 24px; text-align:center; font-size: .85rem; color: var(--muted); }
   footer a{ text-decoration:none; }
   footer a:hover{ color: var(--ink); }
+  .fan-section {
+  position: relative;
+  width: 100%;
+  height: 480px; /* Висота під весь віяловий блок */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  margin-top: 10px; /* Невеликий відступ від хедера */
+}
+
+.cards-fan {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* Загальний стиль для кожної картки (прямокутники з тінню) */
+.cards-fan .card {
+  position: absolute;
+  width: 210px;
+  height: 280px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+/* Точне положення та нахил кожного елемента віяла як на макеті */
+.cards-fan .card:nth-child(1) {
+  transform: translateX(-240px) translateY(25px) rotate(-12deg);
+  z-index: 1;
+}
+
+.cards-fan .card:nth-child(2) {
+  transform: translateX(-120px) translateY(10px) rotate(-6deg);
+  z-index: 2;
+}
+
+/* Центральна винесена вище і без нахилу */
+.cards-fan .card.main-card {
+  width: 230px;
+  height: 310px;
+  transform: translateX(0) translateY(-25px) rotate(0deg);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+  z-index: 5;
+}
+
+.cards-fan .card:nth-child(4) {
+  transform: translateX(120px) translateY(10px) rotate(6deg);
+  z-index: 2;
+}
+
+.cards-fan .card:nth-child(5) {
+  transform: translateX(240px) translateY(25px) rotate(12deg);
+  z-index: 1;
+}
 </style>
+  
 </head>
 <body>
 
@@ -172,7 +233,15 @@ body{
     <span class="bar-tag">поліграфія</span>
   </div>
 </div>
-
+<section class="fan-section">
+  <div class="cards-fan">
+    <div class="card"></div>
+    <div class="card"></div>
+    <div class="card main-card"></div>
+    <div class="card"></div>
+    <div class="card"></div>
+  </div>
+</section>
 <section class="hero">
   <div class="hero-overlay"></div>
   <div class="hero-content">
