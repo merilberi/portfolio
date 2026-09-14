@@ -24,11 +24,17 @@
     html{ scroll-behavior: auto; }
     *{ transition-duration: .001ms !important; }
   }
-  body{
-    margin:0; background: var(--bg); color: var(--ink);
+body{
+    margin:0; background: var(--bg) !important; color: var(--ink);
     font-family: var(--font); line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }
+  
+  /* Ось сюди вставляємо, щоб секції стали прозорими і було видно хмари */
+  main, section, .intro, .meta, footer {
+    background: transparent !important;
+  }
+  
   a{ color: inherit; }
   img, video{ display:block; max-width:100%; }
   :focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
