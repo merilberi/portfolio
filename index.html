@@ -548,25 +548,27 @@
         <div>© 2026</div>
     </footer>
     
-    <!-- Скрипти хмар -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.clouds.min.js"></script>
-    <script>
-    VANTA.FOG({
-  el: "#your-element-selector",
-  mouseControls: true,
-  touchControls: true,
-  gyroControls: false,
-  minHeight: 200.00,
-  minWidth: 200.00,
-  highlightColor: 0xffffff,
-  midtoneColor: 0xa7a6a6,
-  lowlightColor: 0x91415e,
-  baseColor: 0xffffff,
-  blurFactor: 0.45,
-  speed: 1.10,
-  zoom: 1.20
-})
+   <!-- Підключаємо Three.js та Vanta.js (Fog) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  VANTA.FOG({
+    el: "body",
+    mouseControls: true,
+    touchControls: true,
+    gyroControls: false,
+    minHeight: 200.00,
+    minWidth: 200.00,
+    highlightColor: 0xffffff,
+    midtoneColor: 0xc3beba,
+    lowlightColor: 0x91415e,
+    baseColor: 0xffffff,
+    blurFactor: 0.45,
+    speed: 0.5,
+    zoom: 1.28
+  });
+});
 </script>
 </body>
 </html>
