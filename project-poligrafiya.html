@@ -19,7 +19,10 @@
     --font: "Noto Sans", sans-serif;
   }
   *{ box-sizing: border-box; }
-  html{ scroll-behavior: smooth; }
+  html{
+    scroll-behavior: smooth;
+    background: #f1ecec; /* резервний фон, якщо Vanta не завантажиться */
+  }
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior: auto; }
     *{ transition-duration: .001ms !important; }
@@ -27,12 +30,13 @@
   body{
     margin:0; background: transparent !important; color: var(--ink);
     display: flow-root; /* не дає верхньому margin галереї створювати білу смугу */
+    min-height: 100vh;
     font-family: var(--font); line-height: 1.55;
     -webkit-font-smoothing: antialiased;
   }
 
   /* прозорі секції, щоб було видно фон (Vanta fog) */
-  main, section, .intro, .meta, footer {
+  main, section:not(.next), .intro, .meta, footer {
     background: transparent !important;
   }
 
@@ -44,7 +48,9 @@
  .bar{
   position: fixed; top: 16px; left: 16px; right: 16px; z-index: 100;
   display:flex; align-items:center; justify-content:space-between;
+  pointer-events: none;
 }
+.bar > *{ pointer-events: auto; }
 .bar-center {
   position: absolute;
   left: 50%;
@@ -141,25 +147,23 @@
   .fan-gallery.is-visible .fan-card:nth-child(4){ transition-delay: .24s; }
   .fan-gallery.is-visible .fan-card:nth-child(5){ transition-delay: .32s; }
 
-  /* Швидке зміщення картки вправо при наведенні */
-  .fan-gallery.is-visible .fan-card:hover{
-    transform: translateX(120px);
-    transition: transform .25s ease;
-    z-index: 10;
-  }
-
-  /* Картка 1 (поліграфія 1) зміщується по діагоналі — вправо і вниз */
-  .fan-gallery.is-visible .fan-card-diag:hover{
-    transform: translate(120px, 50px) !important;
-    transition: transform .25s ease !important;
-    z-index: 10;
-  }
-
-  /* Картки 2 і 3 (поліграфія 2, 3) зміщуються навпаки — вліво і вниз */
-  .fan-gallery.is-visible .fan-card-diag-left:hover{
-    transform: translate(-80px, 50px) !important;
-    transition: transform .25s ease !important;
-    z-index: 10;
+  /* Hover лише для пристроїв із мишкою */
+  @media (hover: hover) and (pointer: fine){
+    .fan-gallery.is-visible .fan-card:hover{
+      transform: translateX(120px);
+      transition: transform .25s ease;
+      z-index: 10;
+    }
+    .fan-gallery.is-visible .fan-card-diag:hover{
+      transform: translate(120px, 50px) !important;
+      transition: transform .25s ease !important;
+      z-index: 10;
+    }
+    .fan-gallery.is-visible .fan-card-diag-left:hover{
+      transform: translate(-80px, 50px) !important;
+      transition: transform .25s ease !important;
+      z-index: 10;
+    }
   }
 
   /* Картки відступають на 80px від країв екрана */
@@ -174,9 +178,16 @@
   }
 
   /* На вужчих екранах — вертикальний список карток від краю до краю */
-  @media (max-width: 1000px){
+  @media (max-width: 1100px){
     .fan-gallery{ height: auto; display:flex; flex-direction:column; gap:16px; margin-top: 100px; padding: 0; overflow: visible; }
     .fan-card{ position: static; width: 100%; height: auto; aspect-ratio: 476.75 / 355.57; }
+  }
+
+  @media (max-width: 600px){
+    .bar{ top: 12px; left: 12px; right: 12px; }
+    .bar-avatar{ width: 64px; height: 64px; }
+    .bar-tag{ font-size: .68rem; }
+    .fan-gallery{ margin-top: 84px; gap: 12px; }
   }
 
   .next{
@@ -204,7 +215,7 @@
   <a class="back" href="index.html#work">← Назад</a>
   <div class="bar-center">✢</div>
   <div class="bar-avatar">
-    <img src="гранат.png" alt="Поіграфія">
+    <img src="гранат.png" alt="Поліграфія" width="85" height="85" decoding="async">
     <span class="bar-tag">поліграфія</span>
   </div>
 </div>
@@ -212,19 +223,19 @@
 <!-- ЗАМІНИ на свої 5 фото поліграфії -->
 <section class="fan-gallery" id="fanGallery">
   <div class="fan-card fan-card-diag">
-    <img src="images/поліграфія-1.jpg" alt="Поліграфія, фото 1">
+    <img src="images/поліграфія-1.jpg" alt="Поліграфія, фото 1" width="477" height="356" decoding="async" fetchpriority="high">
   </div>
   <div class="fan-card fan-card-diag-left">
-    <img src="images/поліграфія-2.jpg" alt="Поліграфія, фото 2">
+    <img src="images/поліграфія-2.jpg" alt="Поліграфія, фото 2" width="477" height="356" loading="lazy" decoding="async">
   </div>
   <div class="fan-card fan-card-diag-left">
-    <img src="images/поліграфія-3.jpg" alt="Поліграфія, фото 3">
+    <img src="images/поліграфія-3.jpg" alt="Поліграфія, фото 3" width="477" height="356" loading="lazy" decoding="async">
   </div>
   <div class="fan-card">
-    <img src="images/поліграфія-4.jpg" alt="Поліграфія, фото 4">
+    <img src="images/поліграфія-4.jpg" alt="Поліграфія, фото 4" width="477" height="356" loading="lazy" decoding="async">
   </div>
   <div class="fan-card">
-    <img src="images/поліграфія-5.jpg" alt="Поліграфія, фото 5">
+    <img src="images/поліграфія-5.jpg" alt="Поліграфія, фото 5" width="477" height="356" loading="lazy" decoding="async">
   </div>
 </section>
 
@@ -265,11 +276,6 @@
 <script>
   (function(){
     "use strict";
-    var bar = document.getElementById("bar");
-    window.addEventListener("scroll", function(){
-      bar.classList.toggle("is-scrolled", window.scrollY > window.innerHeight * 0.7);
-    });
-
     var fanGallery = document.getElementById("fanGallery");
     if (fanGallery && "IntersectionObserver" in window) {
       var fanObserver = new IntersectionObserver(function(entries){
@@ -279,7 +285,7 @@
             fanObserver.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.3 });
+      }, { threshold: 0.08, rootMargin: "0px 0px -8% 0px" });
       fanObserver.observe(fanGallery);
     } else if (fanGallery) {
       fanGallery.classList.add("is-visible");
@@ -292,7 +298,9 @@
 <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
 <script>
 window.addEventListener('DOMContentLoaded', () => {
-  VANTA.FOG({
+  if (!window.VANTA || !window.THREE) return;
+
+  const fogEffect = VANTA.FOG({
     el: "body",
     mouseControls: true,
     touchControls: true,
@@ -307,6 +315,10 @@ window.addEventListener('DOMContentLoaded', () => {
     speed: 0.5,
     zoom: 1.28
   });
+
+  window.addEventListener('pagehide', () => {
+    if (fogEffect && typeof fogEffect.destroy === 'function') fogEffect.destroy();
+  }, { once: true });
 });
 </script>
 </body>
