@@ -55,7 +55,7 @@
   
   header a, header nav a, .nav-links a, header ul a {
     font-weight: 300 !important;
-    font-size: 18px !important;
+    font-size: 22px !important;
   }
   
   :focus-visible{
@@ -78,7 +78,7 @@
   .wrap{
     max-width: var(--maxw);
     margin: 0 auto;
-    padding: 0 5px;
+    padding: 0 24px;
   }
 
   /* ---------- header ---------- */
@@ -89,18 +89,25 @@
     border-bottom: 1px solid var(--line);
   }
   .nav{
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: none;
     height: auto;
-    padding: 16px 0;
+    margin: 0;
+    padding: 16px 50px;
   }
- .logo {
-  display: inline-block; /* <--- Додай цей рядок */
-  font-family: var(--font);
-  font-weight: 700;
-  font-size: 1.05rem;
-  text-decoration: none;
-  margin-left: -45px; /* <--- Просто збільшуй це число (наприклад -40px), поки лого не стане там, де треба */
-}
+  .nav.wrap{
+    max-width: none;
+    margin: 0;
+  }
+  .logo{
+    font-family: var(--font);
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-decoration: none;
+  }
   .logo-img {
     height: 90px;
     width: auto;
@@ -128,6 +135,7 @@
   }
 
   @media (max-width: 760px){
+    .nav{ padding: 16px 20px; }
     .nav-toggle{ display:block; }
     .nav-links{
       position:absolute; top: 68px; left:0; right:0;
