@@ -21,11 +21,13 @@
     --accent-dark: #B23000;
     --accent-2: #234C5E;
     --maxw: 1180px;
-    --font-display: "Noto Sans", sans-serif;
-    --font-body: "Noto Sans", sans-serif;
+    --font: "Noto Sans", sans-serif;
   }
 
-  *{ box-sizing: border-box; }
+  *, *::before, *::after{
+    box-sizing: border-box;
+    font-family: var(--font) !important;
+  }
   html{ scroll-behavior: smooth; }
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior: auto; }
@@ -39,7 +41,7 @@
 }
 
   h1,h2,h3{
-    font-family: var(--font-display);
+    font-family: var(--font);
     margin: 0;
     line-height: 1.05;
     letter-spacing: -0.01em;
@@ -69,7 +71,7 @@
   .skip-link{
     position:absolute; top:-40px; left:8px; z-index:200;
     background: var(--ink); color: var(--bg);
-    padding: 8px 14px; font-family: var(--font-body); font-size: .9rem;
+    padding: 8px 14px; font-family: var(--font); font-size: .9rem;
   }
   .skip-link:focus{ top: 46px; }
 
@@ -92,7 +94,7 @@
     padding: 16px 0;
   }
   .logo{
-    font-family: var(--font-display);
+    font-family: var(--font);
     font-weight: 700;
     font-size: 1.05rem;
     text-decoration: none;
@@ -266,7 +268,7 @@
     background: linear-gradient(0deg, rgba(0,0,0,.55), transparent);
     color: #fff;
   }
-  .tile__title{ font-family: var(--font-display); font-size: 1rem; font-weight: 600; }
+  .tile__title{ font-family: var(--font); font-size: 1rem; font-weight: 600; }
   .tile__tag{ font-size: .8rem; opacity: .85; margin-top: 4px; display:block; }
   .tile.is-hidden{ display:none; }
 
@@ -367,7 +369,7 @@
     margin-top: 40px;
   }
   .contact-email{
-    font-family: var(--font-display);
+    font-family: var(--font);
     font-size: clamp(1.3rem, 3vw, 2rem);
     text-decoration:none;
     border-bottom: 1px solid var(--accent);
