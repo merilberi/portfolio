@@ -149,58 +149,76 @@
     .nav-links a{ padding: 16px 24px; border-bottom: 1px solid var(--line); }
   }
 
-  /* ---------- hero ---------- */
-.hero {
-  position: relative; /* Робимо головний блок «якорем» */
-  padding: 88px 0 96px;
-  max-width: 900px;
-  margin: 0 auto;
+/* ---------- hero ---------- */
+.hero{
+  position: relative;
+  width: 100%;
+  max-width: none;
+  min-height: 650px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
   text-align: center;
+  border-top: none;
+  border-bottom: 2px solid rgba(255,126,76,.5);
 }
-
-.hero-eyebrow {
-  position: absolute;
-
-  /* Підтягуємо текст ближче до хедера */
-  top: 8px;
-
-  /* Розтягуємо майже на всю ширину екрана */
-  left: 50%;
-  width: calc(100vw - 16px);
-  transform: translateX(-50%);
-
-  /* Однаковий мінімальний відступ зліва і справа */
-  text-align: center;
-  white-space: nowrap;
-
-  /* Трохи більший текст */
-  font-size: clamp(1.65rem, 2.55vw, 2.35rem);
-  font-weight: 200;
+.hero-marquee{
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  overflow: hidden;
+  padding: 10px 0 12px;
+  border-bottom: 1px solid rgba(255,126,76,.18);
 }
-.hero-title-row {
-  margin: 0 auto;
+.hero-marquee__track{
   display: flex;
-  flex-direction: column; /* Ставимо гіфку зверху, а текст знизу (або навпаки) */
-  align-items: center;    /* Вирівнює по центру по горизонталі */
-  justify-content: center;
-  text-align: center;
-  gap: 15px;
-  max-width: 900px;
+  width: max-content;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marqueeMove 28s linear infinite;
 }
-
-.mini-gif {
-  width: 100px;
-  height: 100px;
+.hero-marquee__text{
+  display: inline-block;
+  padding-right: 42px;
+  color: #ef9b76;
+  font-size: clamp(1.15rem,1.8vw,1.75rem);
+  font-weight: 300;
+  letter-spacing: .01em;
+}
+.hero-marquee:hover .hero-marquee__track{ animation-play-state: paused; }
+@keyframes marqueeMove{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(-50%); }
+}
+.hero-title-row{
+  position: absolute;
+  top: 82px;
+  left: 50%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: min(620px,80vw);
+  margin: 0;
+  text-align: center;
+  transform: translateX(-50%);
+}
+.mini-gif{
+  width: 78px;
+  height: 78px;
+  margin: 0;
+  display: block;
   object-fit: cover;
   border-radius: 50%;
-  display: block;
-  margin: 0 auto;
 }
-
-.hero h1 {
-  font-size: 1.4rem !important;
+.hero h1{
+  margin: 0;
+  font-size: clamp(.85rem,1.25vw,1.1rem) !important;
+  font-weight: 400;
+  line-height: 1.35;
 }
-  .hero h1 span{ color: var(--accent); }
+.hero h1 span{ color: var(--accent); }
   
   .hero-lede{
     margin-top: 22px;
@@ -311,61 +329,129 @@
   .about-body{ max-width: 62ch; color: var(--ink); }
   .about-lede{ font-size: 1.15rem; }
 
-  /* Блок для іконок: сітка 3 колонки */
-.tools {
-    margin-top: 36px;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0,1fr));
-    gap: 30px;          /* Це загальний відступ між усіма елементами */
-    row-gap: 75px;      /* А це відстань саме по вертикалі (між рядами) — збільшуй цифру до потрібної */
-  }
-
-  /* Налаштування самих картинок-іконок */
-  .tools img {
-    width: 100%;
-   max-width: 240px !important;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    background: transparent !important; /* Гарантує відсутність будь-якого фону */
-  }
-
-  @media (max-width: 760px){
-    .about{ grid-template-columns: 1fr; }
-    .tools{ grid-template-columns: 1fr; }
-  }
-/* Контейнер підказки */
-.tooltip-wrap {
-  position: relative;
-  display: inline-block;
+.tools{
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: block;
+  margin: 0;
+  pointer-events: none;
 }
-
-/* Сам текст підказки, який з'являється при наведенні */
-.tooltip-wrap::after {
+.floating-object{
+  position: absolute;
+  display: block;
+  pointer-events: auto;
+  text-decoration: none;
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .35s ease;
+  animation: objectDrift 7s ease-in-out infinite;
+  will-change: transform;
+}
+.floating-object img{
+  display: block;
+  width: 100%;
+  max-width: none !important;
+  height: auto;
+  margin: 0;
+  background: transparent !important;
+  animation: imageFloat 5.5s ease-in-out infinite;
+  will-change: transform;
+}
+.floating-object:hover{
+  z-index: 30;
+  transform: scale(1.1) rotate(2deg);
+  filter: drop-shadow(0 18px 15px rgba(50,30,30,.18));
+}
+.floating-object--pomegranate{ top:165px; left:14%; width:clamp(110px,12vw,175px); animation-delay:-1s; animation-duration:7.5s; }
+.floating-object--dice{ top:230px; left:50%; width:clamp(90px,10vw,145px); animation-delay:-3.5s; animation-duration:6.5s; }
+.floating-object--chest{ top:175px; right:8%; width:clamp(145px,16vw,235px); animation-delay:-2.2s; animation-duration:8s; }
+.floating-object--horse{ top:355px; left:5%; width:clamp(90px,9vw,135px); animation-delay:-4.4s; animation-duration:7s; }
+.floating-object--phone{ top:385px; left:38%; width:clamp(85px,8vw,120px); animation-delay:-2.8s; animation-duration:8.5s; }
+.floating-object--bun{ top:360px; right:21%; width:clamp(120px,13vw,190px); animation-delay:-5.2s; animation-duration:7.8s; }
+@keyframes objectDrift{
+  0%,100%{ margin-left:0; margin-top:0; }
+  25%{ margin-left:12px; margin-top:-8px; }
+  50%{ margin-left:-7px; margin-top:10px; }
+  75%{ margin-left:8px; margin-top:5px; }
+}
+@keyframes imageFloat{
+  0%,100%{ transform:translate3d(0,0,0) rotate(-1deg); }
+  33%{ transform:translate3d(7px,-10px,0) rotate(1.5deg); }
+  66%{ transform:translate3d(-6px,7px,0) rotate(-.5deg); }
+}
+.tooltip-wrap::after{
   content: attr(data-tooltip);
   position: absolute;
-  bottom: 50%;
+  bottom: 46%;
   left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  background: #ffffff;    /* Білий фон */
-  color: #111111;         /* Чорний текст */
+  z-index: 40;
   padding: 8px 16px;
-  font-size: 15px;
   border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: #fff;
+  color: #111;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  font-size: 15px;
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.2s ease;
-  z-index: 10;
+  transform: translate(-50%,8px);
+  transition: opacity .2s ease, visibility .2s ease, transform .2s ease;
 }
-
-/* Плавна поява при наведенні */
-.tooltip-wrap:hover::after {
+.tooltip-wrap:hover::after{
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0);
+  transform: translate(-50%,0);
+}
+@media (max-width:900px){
+  .hero{ min-height:600px; }
+  .floating-object--pomegranate{ left:8%; }
+  .floating-object--dice{ left:48%; }
+  .floating-object--chest{ right:4%; }
+  .floating-object--horse{ left:4%; }
+  .floating-object--phone{ left:37%; }
+  .floating-object--bun{ right:12%; }
+}
+@media (max-width:600px){
+  .hero{ min-height:auto; padding-bottom:40px; }
+  .hero-title-row{
+    position: relative;
+    top: auto;
+    left: auto;
+    width: calc(100% - 40px);
+    margin: 30px auto 36px;
+    transform: none;
+  }
+  .hero-marquee__text{ font-size:1.05rem; }
+  .tools{
+    position: relative;
+    inset: auto;
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    align-items: center;
+    gap: 30px 20px;
+    padding: 0 24px;
+  }
+  .floating-object,
+  .floating-object--pomegranate,
+  .floating-object--dice,
+  .floating-object--chest,
+  .floating-object--horse,
+  .floating-object--phone,
+  .floating-object--bun{
+    position: relative;
+    inset: auto;
+    width: min(100%,150px);
+    margin: 0 auto;
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  .hero-marquee__track,
+  .floating-object,
+  .floating-object img{ animation:none !important; }
+}
+@media (max-width:760px){
+  .about{ grid-template-columns:1fr; }
+  .tools{ grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
   .contact{
     background: var(--ink);
@@ -426,22 +512,39 @@
 
 <main id="main">
 
-  <section id="hero" class="hero wrap" style="border-top:none;">
-    <p class="hero-eyebrow">SMMдизайн✦   дизайн упаковки і мерчу❀    дизайн бренду❆    3Dmodeling☆    2Dграфіка☯    дизайн поліграфії✟</p>
-    
-    <div class="hero-title-row">
-     <img src="animation.gif" alt="Анімація" class="mini-gif" style="border-radius: 50% !important;">
-     <h1>напишіть мені <span>щоб обговорити проєкт</span> або отримати бриф</h1>
+  <section id="hero" class="hero">
+    <div class="hero-marquee" aria-label="Напрями дизайну">
+      <div class="hero-marquee__track">
+        <span class="hero-marquee__text">SMMдизайн✦　 дизайн упаковки і мерчу❀　 дизайн бренду❆　 3Dmodeling☆　 2Dграфіка☯　 дизайн поліграфії✟　</span>
+        <span class="hero-marquee__text" aria-hidden="true">SMMдизайн✦　 дизайн упаковки і мерчу❀　 дизайн бренду❆　 3Dmodeling☆　 2Dграфіка☯　 дизайн поліграфії✟　</span>
+      </div>
     </div>
 
-<div class="tools">
-  <a href="project-poligrafiya.html" class="tooltip-wrap" data-tooltip="поліграфія"><img src="гранат.png" alt="Гранат"></a>
-  <a href="project3D_MODELS.html" class="tooltip-wrap" data-tooltip="3D-моделі"><img src="кубики.png" alt="Кубики"></a>
-  <a href="brendbook.html" class="tooltip-wrap" data-tooltip="брендбуки"><img src="скриня.png" alt="Скриня"></a>
-  <a href="#link4" class="tooltip-wrap" data-tooltip="упаковка і мерч"><img src="кінь.png" alt="Кінь"></a>
-  <a href="#link5" class="tooltip-wrap" data-tooltip="Оформлення соцмереж"><img src="телефон.png" alt="Телефон"></a>
-  <a href="#link6" class="tooltip-wrap" data-tooltip="ілюстрації"><img src="булка.png" alt="Булка"></a>
-</div>
+    <div class="hero-title-row">
+      <img src="animation.gif" alt="Анімація" class="mini-gif">
+      <h1>напишіть мені <span>щоб обговорити проєкт</span> або отримати бриф</h1>
+    </div>
+
+    <div class="tools">
+      <a href="project-poligrafiya.html" class="floating-object floating-object--pomegranate tooltip-wrap" data-tooltip="поліграфія" aria-label="Перейти до проєкту поліграфії">
+        <img src="гранат.png" alt="Гранат">
+      </a>
+      <a href="project3D_MODELS.html" class="floating-object floating-object--dice tooltip-wrap" data-tooltip="3D-моделі" aria-label="Перейти до 3D-моделей">
+        <img src="кубики.png" alt="Кубики">
+      </a>
+      <a href="brendbook.html" class="floating-object floating-object--chest tooltip-wrap" data-tooltip="брендбуки" aria-label="Перейти до брендбуків">
+        <img src="скриня.png" alt="Скриня">
+      </a>
+      <a href="#link4" class="floating-object floating-object--horse tooltip-wrap" data-tooltip="упаковка і мерч" aria-label="Перейти до дизайну упаковки й мерчу">
+        <img src="кінь.png" alt="Кінь">
+      </a>
+      <a href="#link5" class="floating-object floating-object--phone tooltip-wrap" data-tooltip="Оформлення соцмереж" aria-label="Перейти до оформлення соцмереж">
+        <img src="телефон.png" alt="Телефон">
+      </a>
+      <a href="#link6" class="floating-object floating-object--bun tooltip-wrap" data-tooltip="ілюстрації" aria-label="Перейти до ілюстрацій">
+        <img src="булка.png" alt="Булка">
+      </a>
+    </div>
   </section>
 
   <section id="services">
