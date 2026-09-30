@@ -155,7 +155,7 @@
   position: relative;
   width: 100%;
   max-width: none;
-  min-height: 650px;
+  min-height: 570px;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -317,7 +317,7 @@
   transform: translate(-50%,0);
 }
 @media (max-width:900px){
-  .hero{ min-height:600px; }
+  .hero{ min-height:570px; }
   .floating-object--pomegranate{ left:8%; }
   .floating-object--dice{ left:48%; }
   .floating-object--chest{ right:4%; }
@@ -370,15 +370,14 @@
    разом зі шириною екрана так само, як у дизайні.
    ===================================================== */
 #work{
-  padding: 60px 0 40px;
+  padding: 10px 0 40px;
   border-top: none;
 }
 .collage{
   position: relative;
-  width: 100%;
-  max-width: 1519px;
-  margin: 0 auto;
-  aspect-ratio: 1519 / 760;
+  width: calc(100% - 10px);
+  margin: 0 5px;
+  aspect-ratio: 527 / 296;
 }
 .collage__item{
   position: absolute;
@@ -387,7 +386,7 @@
   text-decoration: none;
   /* шахова заглушка, поки немає картинки (як у макеті) */
   background:
-    conic-gradient(rgba(255,255,255,.7) 25%, rgba(240,240,240,.7) 0 50%, rgba(255,255,255,.7) 0 75%, rgba(240,240,240,.7) 0) 0 0 / 28px 28px;
+    conic-gradient(rgba(255,255,255,.95) 25%, rgba(239,239,239,.95) 0 50%, rgba(255,255,255,.95) 0 75%, rgba(239,239,239,.95) 0) 0 0 / clamp(18px, 2.3vw, 44px) clamp(18px, 2.3vw, 44px);
   transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
 }
 .collage__item img{
@@ -403,19 +402,21 @@
 }
 
 /* left / top / width — у % від колажу; aspect-ratio — пропорції кожної картинки */
-.c1{ left: 10.8%; top: 15.1%; width: 11.1%; aspect-ratio: 169/167; }
-.c2{ left: 24.8%; top: 3.7%;  width: 19.7%; aspect-ratio: 299/283; }
-.c3{ left: 50.2%; top: 12.4%; width: 22.8%; aspect-ratio: 346/372; }
-.c4{ left: 74.7%; top: 6.6%;  width: 15.1%; aspect-ratio: 230/232; }
-.c5{ left: 8.4%;  top: 44.9%; width: 22.1%; aspect-ratio: 335/336; }
-.c6{ left: 33.6%; top: 44.9%; width: 15.5%; aspect-ratio: 236/248; }
-.c7{ left: 76.2%; top: 44.9%; width: 8.7%;  aspect-ratio: 132/134; }
-.c8{ left: 56.8%; top: 66.3%; width: 15.5%; aspect-ratio: 236/210; }
-.c9{ left: 79.1%; top: 67.1%; width: 13.3%; aspect-ratio: 202/204; }
+.c1{ left: 4.55%; top: 13.85%; width: 12.9%; aspect-ratio: 68/67; }
+.c2{ left: 20.7%; top: 2.0%; width: 23.0%; aspect-ratio: 121/114; }
+.c3{ left: 50.3%; top: 11.1%; width: 26.0%; aspect-ratio: 137/148; }
+.c4{ left: 78.6%; top: 4.7%; width: 17.6%; aspect-ratio: 93/94; }
+.c5{ left: 1.9%; top: 44.3%; width: 25.6%; aspect-ratio: 135/137; }
+.c6{ left: 31.1%; top: 44.3%; width: 18.0%; aspect-ratio: 95/100; }
+.c7{ left: 80.1%; top: 44.3%; width: 10.2%; aspect-ratio: 54/55; }
+.c8{ left: 57.9%; top: 66.6%; width: 17.8%; aspect-ratio: 94/85; }
+.c9{ left: 83.9%; top: 67.6%; width: 15.2%; aspect-ratio: 80/82; }
 
 @media (max-width: 760px){
   #work{ padding: 40px 0; }
   .collage{
+    width: 100%;
+    margin: 0;
     aspect-ratio: auto;
     display: grid;
     grid-template-columns: repeat(2, minmax(0,1fr));
@@ -427,28 +428,29 @@
 
 /* =====================================================
    НОВЕ: «Про мене»
+   Розміри в vw, щоб блок масштабувався як на дизайні.
    ===================================================== */
 #about{
-  padding: 60px 0 0;
+  padding: 40px 0 0;
   border-top: none;
 }
 .about-grid{
   display: grid;
-  grid-template-columns: minmax(200px, 27%) minmax(0, 1fr) minmax(260px, 30%);
+  grid-template-columns: 26.7% minmax(0, 1fr) 30%;
   grid-template-areas:
-    "photo title tools"
+    ".     title tools"
     "photo text  tools";
-  column-gap: 0;
   align-items: start;
 }
 .about-photo{
   grid-area: photo;
-  align-self: end;
+  align-self: start;
+  margin-top: 2.8vw;
   width: 100%;
-  aspect-ratio: 408 / 540;
+  aspect-ratio: 408 / 560;
   overflow: hidden;
   background:
-    conic-gradient(rgba(255,255,255,.7) 25%, rgba(240,240,240,.7) 0 50%, rgba(255,255,255,.7) 0 75%, rgba(240,240,240,.7) 0) 0 0 / 28px 28px;
+    conic-gradient(rgba(255,255,255,.95) 25%, rgba(239,239,239,.95) 0 50%, rgba(255,255,255,.95) 0 75%, rgba(239,239,239,.95) 0) 0 0 / clamp(18px, 2.3vw, 44px) clamp(18px, 2.3vw, 44px);
 }
 .about-photo img{
   display:block; width:100%; height:100%; object-fit: cover;
@@ -456,64 +458,62 @@
 .about-title{
   grid-area: title;
   align-self: end;
-  margin: 0 0 60px 7px;
+  margin: 0 0 4.6vw 0;
   font-family: var(--mono) !important;
   font-weight: 200;
-  font-size: clamp(3rem, 7.4vw, 7rem);
+  font-size: 6.7vw;
   line-height: 1;
   letter-spacing: 0;
   white-space: nowrap;
 }
 .about-text{
   grid-area: text;
-  padding-left: 113px;
-  padding-right: 24px;
+  padding-left: 7.8vw;
+  width: 32.5vw;
+  max-width: 100%;
   padding-bottom: 60px;
-  max-width: 34rem;
-  font-size: clamp(1.1rem, 1.7vw, 1.6rem);
+  font-size: 2vw;
   font-weight: 300;
-  line-height: 1.3;
+  line-height: 1.05;
 }
-.about-text p + p{ margin-top: 1.1em; }
+.about-text p + p{ margin-top: .75em; }
 
 .about-tools{
   grid-area: tools;
-  padding: 0 50px 60px 0;
   align-self: start;
-  /* вирівнюємо з висотою заголовка */
-  padding-top: 0;
-  margin-top: clamp(1rem, 2vw, 2rem);
+  padding: 0 0 60px 0;
+  margin-top: 1.4vw;
 }
 .tools-label{
-  margin: 0 0 22px;
-  color: #ff5a1f;
+  margin: 0 0 1.6vw;
+  color: #f58a3a;
   font-family: var(--mono) !important;
   font-weight: 300;
-  font-size: clamp(1.1rem, 1.7vw, 1.65rem);
-  letter-spacing: .12em;
+  font-size: 1.75vw;
+  letter-spacing: .1em;
 }
-.tools-label + .icon-row{ margin-bottom: 0; }
-.about-tools .tools-label:not(:first-child){ margin-top: clamp(70px, 9vw, 150px); }
+.about-tools .tools-label:not(:first-child){ margin-top: 7vw; }
 
 .icon-row{
   display: grid;
-  grid-template-columns: repeat(4, 58px);
-  gap: 32px 42px;
+  grid-template-columns: repeat(4, 3.8vw);
+  gap: 2.4vw 3.2vw;
   align-items: center;
   justify-items: center;
 }
 .icon-row--small{
-  grid-template-columns: repeat(3, 40px);
-  gap: 32px;
+  grid-template-columns: repeat(3, 2.9vw);
+  gap: 2.4vw;
+  justify-items: start;
 }
 .icon{
   display: grid;
   place-items: center;
-  width: 58px; height: 58px;
-  border-radius: 12px;
+  width: 3.8vw; height: 3.8vw;
+  border-radius: .8vw;
   font-family: var(--font) !important;
   font-weight: 700;
-  font-size: 30px;
+  font-size: 2vw;
   letter-spacing: -.02em;
   line-height: 1;
   transition: transform .25s cubic-bezier(.2,.8,.2,1);
@@ -521,17 +521,15 @@
 .icon:hover{ transform: translateY(-4px) rotate(-3deg); }
 .icon svg{ display:block; width:100%; height:100%; }
 .icon--svg{ background: none; border-radius: 0; }
-.icon--small{ width: 40px; height: 40px; }
+.icon--small{ width: 2.9vw; height: 2.9vw; }
 .icon--ae{ background:#00005b; color:#9999ff; }
 .icon--id{ background:#49021f; color:#ff3366; }
 .icon--pt{ background:#1c2a00; color:#a4e800; }
 .icon--ai{ background:#330000; color:#ff9a00; }
 .icon--ps{ background:#001e36; color:#31a8ff; }
 
-@media (max-width: 1000px){
-  .about-text{ padding-left: 40px; }
-}
 @media (max-width: 860px){
+  #about{ padding-top: 40px; }
   .about-grid{
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -540,11 +538,16 @@
       "tools"
       "photo";
   }
-  .about-title{ margin: 0 20px 32px; }
-  .about-text{ padding: 0 20px 40px; }
+  .about-title{ margin: 0 20px 28px; font-size: 3.4rem; }
+  .about-text{ padding: 0 20px 40px; width: auto; font-size: 1.15rem; line-height: 1.3; }
   .about-tools{ padding: 0 20px 48px; margin-top: 0; }
-  .about-tools .tools-label:not(:first-child){ margin-top: 48px; }
-  .about-photo{ max-width: 420px; }
+  .tools-label{ font-size: 1.1rem; margin-bottom: 18px; }
+  .about-tools .tools-label:not(:first-child){ margin-top: 40px; }
+  .icon-row{ grid-template-columns: repeat(4, 52px); gap: 24px 28px; }
+  .icon-row--small{ grid-template-columns: repeat(3, 40px); gap: 24px; }
+  .icon{ width: 52px; height: 52px; border-radius: 10px; font-size: 26px; }
+  .icon--small{ width: 40px; height: 40px; }
+  .about-photo{ margin-top: 0; max-width: 420px; }
 }
 
 /* ---------- footer ---------- */
