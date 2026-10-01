@@ -445,12 +445,14 @@
 .about-photo{
   grid-area: photo;
   align-self: start;
-  margin-top: 0vw; /* Змініть це значення на потрібне (наприклад, 10vw, 150px тощо) */
+  margin-top: 0;
+  transform: translateY(100px); /* Змініть число 100px на те, наскільки пікселів треба опустити */
   width: 100%;
   aspect-ratio: 408 / 560;
   overflow: hidden;
   background:
     conic-gradient(rgba(255,255,255,.95) 25%, rgba(239,239,239,.95) 0 50%, rgba(255,255,255,.95) 0 75%, rgba(239,239,239,.95) 0) 0 0 / clamp(18px, 2.3vw, 44px) clamp(18px, 2.3vw, 44px);
+}
 }
 .about-photo img{
   display:block; width:100%; height:100%; object-fit: cover;
