@@ -87,7 +87,7 @@
     position: sticky; top: 0; z-index: 100;
     background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(5px);
-    border-bottom: 1px solid var(--line);
+    border-bottom: none;
   }
   .nav{
     display: flex;
@@ -150,14 +150,14 @@
     .nav-links a{ padding: 16px 24px; border-bottom: 1px solid var(--line); }
   }
 
-/* ---------- hero (без змін) ---------- */
+/* ---------- hero ---------- */
 .hero{
   position: relative;
   width: 100%;
   max-width: none;
   min-height: 660px; /* Збільшіть під свої потреби */
   margin: 0;
-  padding: 0 0 80px 0; /* Оце додасть простір знизу */
+  padding: 0 0 40px 0; /* було 80px: зменшено, щоб нік групи був ближче до анімацій */
   overflow: hidden;
   text-align: center;
   border-top: none;
@@ -365,12 +365,54 @@
 }
 
 /* =====================================================
+   НОВЕ: телеграм-група (між hero і колажем)
+   ===================================================== */
+.tg-nick{
+  position: relative;
+  z-index: 6;
+  text-align: center;
+  padding: 0 20px;
+  margin-top: -30px; /* підтягує нік ближче до анімацій; змініть під себе */
+}
+.tg-nick a{
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color .25s ease, transform .35s cubic-bezier(.2,.8,.2,1);
+}
+.tg-icon{
+  width: clamp(28px, 3vw, 40px);
+  height: auto;
+  flex: none;
+}
+.tg-nick span{
+  font-family: var(--mono) !important;
+  font-weight: 200;
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
+  letter-spacing: .02em;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+.tg-nick a:hover{
+  color: var(--accent);
+  transform: translateY(-3px);
+}
+@media (max-width: 600px){
+  .tg-nick{ margin-top: 10px; }
+  .tg-nick a{ gap: 14px; }
+  .tg-nick span{ font-size: 1rem; }
+}
+
+/* =====================================================
    НОВЕ: колаж робіт (під hero)
    Усі розміри й позиції в %, тому макет масштабується
    разом зі шириною екрана так само, як у дизайні.
    ===================================================== */
 #work{
-  padding: 70px 0 40px;
+  padding: 30px 0 40px; /* було 70px зверху */
   border-top: none;
 }
 .collage{
@@ -627,6 +669,16 @@
         <img src="булка.png" alt="Булка">
       </a>
     </div>
+  </section>
+
+  <!-- НОВЕ: телеграм-група -->
+  <section id="contact" class="tg-nick" aria-label="Телеграм-група">
+    <a href="https://t.me/merilberi_design" target="_blank" rel="noopener">
+      <svg class="tg-icon" viewBox="0 0 448 512" aria-hidden="true">
+        <path fill="currentColor" d="M446.7 98.6l-67.6 318.8c-5.1 22.5-18.4 28.1-37.3 17.5l-103-75.9-49.7 47.8c-5.5 5.5-10.1 10.1-20.7 10.1l7.4-104.9 190.9-172.5c8.3-7.4-1.8-11.5-12.9-4.1L117.8 284 16.2 252.2c-22.1-6.9-22.5-22.1 4.6-32.7L418.2 66.4c18.4-6.9 34.5 4.1 28.5 32.2z"/>
+      </svg>
+      <span>t.me/merilberi_design</span>
+    </a>
   </section>
 
   <!-- НОВЕ: колаж робіт -->
