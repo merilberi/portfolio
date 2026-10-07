@@ -114,21 +114,35 @@
     width: auto;
     display: block;
   }
+  /* меню-випадайка: бургер показується на всіх екранах */
   .nav-links{
-    display:flex; gap: 32px;
+    position: absolute;
+    top: 100%;
+    right: 50px;
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: rgba(255,255,255,.85);
+    backdrop-filter: blur(8px);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .25s ease;
   }
+  .nav-links.is-open{ max-height: 320px; }
   .nav-links a{
-    text-decoration:none;
+    display: block;
+    text-decoration: none;
     font-size: .95rem;
-    padding: 4px 0;
-    border-bottom: 1px solid transparent;
-    transition: border-color .15s ease, color .15s ease;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--line);
+    transition: color .15s ease;
   }
-  .nav-links a:hover{ border-color: var(--accent); }
+  .nav-links a:hover{ color: var(--accent); }
 
   .nav-toggle{
-    display:none;
-    background:none; border: 1px solid var(--line); padding: 8px 10px;
+    display: block;
+    background: none; border: 1px solid var(--line); padding: 8px 10px;
   }
   .nav-toggle span, .nav-toggle::before, .nav-toggle::after{
     content:""; display:block; width: 20px; height: 2px; background: var(--ink);
@@ -137,17 +151,7 @@
 
   @media (max-width: 760px){
     .nav{ padding: 16px 20px; }
-    .nav-toggle{ display:block; }
-    .nav-links{
-      position:absolute; top: 68px; left:0; right:0;
-      background: var(--bg);
-      border-bottom: 1px solid var(--line);
-      flex-direction: column; gap: 0;
-      max-height: 0; overflow:hidden;
-      transition: max-height .25s ease;
-    }
-    .nav-links.is-open{ max-height: 300px; }
-    .nav-links a{ padding: 16px 24px; border-bottom: 1px solid var(--line); }
+    .nav-links{ left: 0; right: 0; width: auto; }
   }
 
 /* ---------- hero ---------- */
@@ -710,9 +714,9 @@
       <div class="about-text">
         <p>роблю дизайн і багато думаю </p>
         <p> сьогодні чимало краси зроблених людиною.
-        Тому так само серед зробленого людьми є й дивне. але я стараюсь робити сірі картинки не такими скучними(не дивіться на мій сірий фон).
-        люблю робити в своєму стилі але за ваші гроші зроблю так як хочете </p>
-        <p>Пишіть мені на телеграм @Amriya99 </p>
+        Тому так само серед зробленого людьми є й дивне. але я стараюсь робити сірі картинки не такими скучними.
+        люблю робити в своєму стилі але за ваші гроші зроблю всі забаганки по проєкту</p>
+        <p>зателефонувати можна лише за попереднім записом в телеграм @Amriya99 </p>
       </div>
 
       <aside class="about-tools" aria-label="Інструменти">
