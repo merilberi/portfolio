@@ -115,30 +115,58 @@
     display: block;
   }
   /* меню-випадайка: бургер показується на всіх екранах */
+  /* бокова панель меню з папками (як на макеті) */
   .nav-links{
-    position: absolute;
+    position: absolute;          /* header має backdrop-filter, тому не fixed */
     top: 100%;
-    right: 50px;
-    width: 260px;
+    right: 0;
+    width: min(320px, 100vw);
+    height: calc(100vh - 122px); /* 122px ≈ висота шапки (лого 90px + відступи) */
+    height: calc(100dvh - 122px);
     display: flex;
     flex-direction: column;
-    gap: 0;
-    background: rgba(255,255,255,.85);
-    backdrop-filter: blur(8px);
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height .25s ease;
+    gap: 80px;
+    padding: 40px 32px 40px 36px;
+    overflow-y: auto;
+    background: rgba(255,255,255,.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform .35s cubic-bezier(.2,.8,.2,1), visibility 0s linear .35s;
   }
-  .nav-links.is-open{ max-height: 320px; }
+  .nav-links.is-open{
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform .35s cubic-bezier(.2,.8,.2,1), visibility 0s;
+  }
   .nav-links a{
-    display: block;
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
     text-decoration: none;
-    font-size: .95rem;
-    padding: 16px 24px;
-    border-bottom: 1px solid var(--line);
+    border-bottom: none;
+    padding: 0;
+  }
+  .nav-folder{
+    display: block;
+    width: 84px;
+    height: auto;
+    flex: none;
+    transition: transform .3s cubic-bezier(.2,.8,.2,1);
+  }
+  .nav-label{
+    margin-bottom: 14px;
+    padding: 6px 10px;
+    background: #fff;
+    color: #111;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
     transition: color .15s ease;
   }
-  .nav-links a:hover{ color: var(--accent); }
+  .nav-links a:hover .nav-folder{ transform: translateY(-4px) rotate(-3deg); }
+  .nav-links a:hover .nav-label{ color: var(--accent); }
 
   .nav-toggle{
     display: block;
@@ -154,7 +182,7 @@
 
   @media (max-width: 760px){
     .nav{ padding: 16px 20px; }
-    .nav-links{ left: 0; right: 0; width: auto; }
+    .nav-links{ gap: 48px; padding-top: 28px; }
   }
 
 /* ---------- hero ---------- */
@@ -632,10 +660,10 @@
       <img src="images/vty.png" alt="Меню">
     </button>
     <ul class="nav-links" id="nav-links">
-      <li><a href="#services">Послуги</a></li>
-      <li><a href="#work">Роботи</a></li>
-      <li><a href="#about">Про мене</a></li>
-      <li><a href="#contact">Контакти</a></li>
+      <li><a href="#services"><img class="nav-folder" src="images/folder-zebra.png" alt=""><span class="nav-label">послуги</span></a></li>
+      <li><a href="#work"><img class="nav-folder" src="images/folder-grass.png" alt=""><span class="nav-label">роботи</span></a></li>
+      <li><a href="#contact"><img class="nav-folder" src="images/folder-leopard.png" alt=""><span class="nav-label">контакти</span></a></li>
+      <li><a href="#about"><img class="nav-folder" src="images/folder-pink.png" alt=""><span class="nav-label">про мене</span></a></li>
     </ul>
   </nav>
 </header>
@@ -845,6 +873,12 @@ if (toggle && links) {
     const open = links.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', open);
   });
+  const closeMenu = () => {
+    links.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 }
 </script>
 </body>
