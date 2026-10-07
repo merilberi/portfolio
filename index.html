@@ -142,11 +142,14 @@
 
   .nav-toggle{
     display: block;
-    background: none; border: 1px solid var(--line); padding: 8px 10px;
+    background: none; border: none; padding: 4px 0;
+    transition: transform .25s cubic-bezier(.2,.8,.2,1);
   }
-  .nav-toggle span, .nav-toggle::before, .nav-toggle::after{
-    content:""; display:block; width: 20px; height: 2px; background: var(--ink);
-    margin: 4px 0;
+  .nav-toggle:hover{ transform: translateY(-2px) rotate(-2deg); }
+  .nav-toggle img{
+    display: block;
+    height: 44px;   /* розмір напису «МЕНЮ»; змініть під себе */
+    width: auto;
   }
 
   @media (max-width: 760px){
@@ -626,7 +629,7 @@
   <nav class="nav wrap">
     <a class="logo" href="#hero"><img src="images/logo_09_09.png" alt="Назва бренду" class="logo-img"></a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Відкрити меню">
-      <span class="visually-hidden">Меню</span>
+      <img src="images/vty.png" alt="Меню">
     </button>
     <ul class="nav-links" id="nav-links">
       <li><a href="#services">Послуги</a></li>
