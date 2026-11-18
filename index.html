@@ -125,7 +125,7 @@
     height: calc(100dvh - 122px);
     display: flex;
     flex-direction: column;
-    gap: 80px;
+    gap: clamp(36px, 7vh, 80px); /* було 80px: зменшено, щоб 5 пунктів влізли */
     padding: 40px 32px 40px 36px;
     overflow-y: auto;
     background: rgba(255,255,255,.55);
@@ -155,6 +155,11 @@
     flex: none;
     transition: transform .3s cubic-bezier(.2,.8,.2,1);
   }
+  /* НОВЕ: такса для пункту FAQ */
+  .nav-folder--faq{
+    width: 100px;      /* трохи більша за папки, як на макеті */
+    margin-top: -20px; /* щоб знак питання не збільшував проміжок */
+  }
   .nav-label{
     margin-bottom: 14px;
     padding: 6px 10px;
@@ -182,7 +187,7 @@
 
   @media (max-width: 760px){
     .nav{ padding: 16px 20px; }
-    .nav-links{ gap: 48px; padding-top: 28px; }
+    .nav-links{ gap: 36px; padding-top: 28px; }
   }
 
 /* ---------- hero ---------- */
@@ -664,6 +669,8 @@
       <li><a href="#work"><img class="nav-folder" src="images/folder-grass.png" alt=""><span class="nav-label">роботи</span></a></li>
       <li><a href="#contact"><img class="nav-folder" src="images/folder-leopard.png" alt=""><span class="nav-label">контакти</span></a></li>
       <li><a href="#about"><img class="nav-folder" src="images/folder-pink.png" alt=""><span class="nav-label">про мене</span></a></li>
+      <!-- НОВЕ: FAQ -->
+      <li><a href="faq.html"><img class="nav-folder nav-folder--faq" src="images/taksa-faq.png" alt=""><span class="nav-label">FAQ</span></a></li>
     </ul>
   </nav>
 </header>
