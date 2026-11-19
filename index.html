@@ -459,7 +459,7 @@
   position: relative;
   width: calc(100% - 10px);
   margin: 0 5px;
-  aspect-ratio: 527 / 296;
+  aspect-ratio: 527 / 187; /* було 527/296: зменшено після видалення порожніх квадратів */
 }
 .collage__item{
   position: absolute;
@@ -484,28 +484,30 @@
 }
 
 /* left / top / width — у % від колажу; aspect-ratio — пропорції кожної картинки */
-.c1{ left: 4.55%; top: 13.85%; width: 12.9%; aspect-ratio: 68/67; }
-.c2{ left: 20.7%; top: 2.0%; width: 23.0%; aspect-ratio: 121/114; }
-.c3{ left: 50.3%; top: 11.1%; width: 26.0%; aspect-ratio: 137/148; }
-.c4{ left: 78.6%; top: 4.7%; width: 17.6%; aspect-ratio: 93/94; }
-.c5{ left: 1.9%; top: 44.3%; width: 25.6%; aspect-ratio: 135/137; }
-.c6{ left: 31.1%; top: 44.3%; width: 18.0%; aspect-ratio: 95/100; }
-.c7{ left: 80.1%; top: 44.3%; width: 10.2%; aspect-ratio: 54/55; }
-.c8{ left: 57.9%; top: 66.6%; width: 17.8%; aspect-ratio: 94/85; }
-.c9{ left: 83.9%; top: 67.6%; width: 15.2%; aspect-ratio: 80/82; }
+.c1{ left: 4.55%; top: 21.92%; width: 12.9%; aspect-ratio: 68/67; }
+.c2{ left: 20.7%; top: 3.17%; width: 23.0%; aspect-ratio: 121/114; }
+.c3{ left: 50.3%; top: 17.57%; width: 26.0%; aspect-ratio: 137/148; }
+.c4{ left: 78.6%; top: 7.44%; width: 17.6%; aspect-ratio: 93/94; }
 
 @media (max-width: 760px){
   #work{ padding: 40px 0; }
+  /* мобільна версія: роботи одна під одною в шаховому порядку (зліва / справа) */
   .collage{
     width: 100%;
     margin: 0;
     aspect-ratio: auto;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0,1fr));
-    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;               /* відстань між роботами */
     padding: 0 20px;
   }
-  .collage__item{ position: relative; left: auto; top: auto; width: 100%; }
+  .collage__item{
+    position: relative;
+    left: auto; top: auto;
+    width: 64%;              /* ширина кожної роботи */
+  }
+  .collage__item:nth-child(odd){ align-self: flex-start; }  /* 1-ша, 3-тя — зліва */
+  .collage__item:nth-child(even){ align-self: flex-end; }   /* 2-га, 4-та — справа */
 }
 
 /* =====================================================
@@ -731,11 +733,6 @@
       <a class="collage__item c2" href="#"><img src="images/sunset_01.gif" alt="західсонця" onerror="this.style.display='none'"></a>
       <a class="collage__item c3" href="#"><img src="images/dzvin_01.gif" alt="дзвін" onerror="this.style.display='none'"></a>
       <a class="collage__item c4" href="#"><img src="images/landscape_01.gif" alt="гори" onerror="this.style.display='none'"></a>
-      <a class="collage__item c5" href="#"><img src="images/work-5.png" alt="Робота 5" onerror="this.style.display='none'"></a>
-      <a class="collage__item c6" href="#"><img src="images/work-6.png" alt="Робота 6" onerror="this.style.display='none'"></a>
-      <a class="collage__item c7" href="#"><img src="images/work-7.png" alt="Робота 7" onerror="this.style.display='none'"></a>
-      <a class="collage__item c8" href="#"><img src="images/work-8.png" alt="Робота 8" onerror="this.style.display='none'"></a>
-      <a class="collage__item c9" href="#"><img src="images/work-9.png" alt="Робота 9" onerror="this.style.display='none'"></a>
     </div>
   </section>
 
