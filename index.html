@@ -523,6 +523,7 @@
 }
 #projects{
   padding: 40px clamp(16px, 4vw, 60px) 60px;
+  scroll-margin-top: 110px;              /* щоб при переході з меню заголовок не ховався під шапкою */
 }
 .projects-title{
   margin: 0 0 clamp(24px, 4vw, 60px);
@@ -532,7 +533,8 @@
   font-size: clamp(5rem, 16vw, 18rem);   /* розмір слова «Проєкти» */
   line-height: 1;
   letter-spacing: 0;
-  color: var(--ink);
+  color: #fff;                            /* білий, як «Проєкти» на сторінці айдентики */
+  text-shadow: 0 2px 14px rgba(0,0,0,.12);
 }
 .proj-grid{
   --gap: clamp(10px, 1.6vw, 24px);       /* відстань між картками */
@@ -741,7 +743,7 @@
     </button>
     <ul class="nav-links" id="nav-links">
       <li><a href="#services"><img class="nav-folder" src="images/folder-zebra.png" alt=""><span class="nav-label">послуги</span></a></li>
-      <li><a href="#work"><img class="nav-folder" src="images/folder-grass.png" alt=""><span class="nav-label">роботи</span></a></li>
+      <li><a href="#projects"><img class="nav-folder" src="images/folder-grass.png" alt=""><span class="nav-label">роботи</span></a></li>
       <li><a href="#contact"><img class="nav-folder" src="images/folder-leopard.png" alt=""><span class="nav-label">контакти</span></a></li>
       <li><a href="#about"><img class="nav-folder" src="images/folder-pink.png" alt=""><span class="nav-label">про мене</span></a></li>
       <!-- НОВЕ: FAQ -->
