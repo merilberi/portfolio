@@ -511,6 +511,79 @@
 }
 
 /* =====================================================
+   НОВЕ: «Проєкти» — 4 колонки різної висоти, як у макеті
+   Картинки лежать у папці «проєкти»: work_1 … work_18
+   ===================================================== */
+@font-face{
+  font-family: "AnastasiaScript";
+  src: url("fonts/AnastasiaScript.woff2") format("woff2"),
+       url("fonts/AnastasiaScript.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+#projects{
+  padding: 40px clamp(16px, 4vw, 60px) 60px;
+}
+.projects-title{
+  margin: 0 0 clamp(24px, 4vw, 60px);
+  text-align: center;
+  font-family: "AnastasiaScript", cursive !important;
+  font-weight: 400;
+  font-size: clamp(5rem, 16vw, 18rem);   /* розмір слова «Проєкти» */
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+.proj-grid{
+  --gap: clamp(10px, 1.6vw, 24px);       /* відстань між картками */
+  display: grid;
+  grid-template-columns: 141fr 120fr 145fr 128fr;  /* ширини колонок з макета */
+  gap: var(--gap);
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: start;
+}
+.proj-col{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+.proj{
+  position: relative;
+  overflow: hidden;
+  border-radius: clamp(8px, 1.2vw, 16px);
+  background: #d9d9d9;                    /* сіра заглушка, поки немає картинки */
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
+}
+.proj img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;                             /* показуємо, лише коли картинка завантажилась */
+  transition: opacity .4s ease;
+}
+.proj img.is-loaded{ opacity: 1; }
+.proj:hover{
+  z-index: 2;
+  transform: scale(1.03);
+  box-shadow: 0 20px 40px rgba(60,30,40,.18);
+}
+/* пропорції кожної картки (ширина / висота), як у макеті */
+.w1{aspect-ratio:141/101} .w5{aspect-ratio:141/88}  .w9{aspect-ratio:141/84}  .w13{aspect-ratio:141/149} .w16{aspect-ratio:141/97}
+.w2{aspect-ratio:120/143} .w6{aspect-ratio:120/76}  .w10{aspect-ratio:120/76} .w14{aspect-ratio:120/144} .w17{aspect-ratio:120/81}
+.w3{aspect-ratio:145/116} .w7{aspect-ratio:145/134} .w11{aspect-ratio:145/133} .w15{aspect-ratio:145/151}
+.w4{aspect-ratio:128/170} .w8{aspect-ratio:128/73}  .w12{aspect-ratio:128/200} .w18{aspect-ratio:128/90}
+
+/* телефон: 2 колонки, картки щільно одна під одною */
+@media (max-width: 760px){
+  #projects{ padding: 30px 20px 40px; }
+  .proj-grid{ display: block; columns: 2; column-gap: var(--gap); }
+  .proj-col{ display: contents; }
+  .proj{ break-inside: avoid; margin-bottom: var(--gap); }
+}
+
+/* =====================================================
    НОВЕ: «Про мене»
    Розміри в vw, щоб блок масштабувався як на дизайні.
    ===================================================== */
@@ -736,6 +809,39 @@
     </div>
   </section>
 
+  <!-- НОВЕ: проєкти (картинки в папці «проєкти», назви work_1 … work_18) -->
+  <section id="projects" aria-label="Проєкти">
+    <h2 class="projects-title">Проєкти</h2>
+    <div class="proj-grid">
+      <div class="proj-col">
+        <div class="proj w1"><img data-src="проєкти/work_1" alt="Проєкт 1"></div>
+        <div class="proj w5"><img data-src="проєкти/work_5" alt="Проєкт 5"></div>
+        <div class="proj w9"><img data-src="проєкти/work_9" alt="Проєкт 9"></div>
+        <div class="proj w13"><img data-src="проєкти/work_13" alt="Проєкт 13"></div>
+        <div class="proj w16"><img data-src="проєкти/work_16" alt="Проєкт 16"></div>
+      </div>
+      <div class="proj-col">
+        <div class="proj w2"><img data-src="проєкти/work_2" alt="Проєкт 2"></div>
+        <div class="proj w6"><img data-src="проєкти/work_6" alt="Проєкт 6"></div>
+        <div class="proj w10"><img data-src="проєкти/work_10" alt="Проєкт 10"></div>
+        <div class="proj w14"><img data-src="проєкти/work_14" alt="Проєкт 14"></div>
+        <div class="proj w17"><img data-src="проєкти/work_17" alt="Проєкт 17"></div>
+      </div>
+      <div class="proj-col">
+        <div class="proj w3"><img data-src="проєкти/work_3" alt="Проєкт 3"></div>
+        <div class="proj w7"><img data-src="проєкти/work_7" alt="Проєкт 7"></div>
+        <div class="proj w11"><img data-src="проєкти/work_11" alt="Проєкт 11"></div>
+        <div class="proj w15"><img data-src="проєкти/work_15" alt="Проєкт 15"></div>
+      </div>
+      <div class="proj-col">
+        <div class="proj w4"><img data-src="проєкти/work_4" alt="Проєкт 4"></div>
+        <div class="proj w8"><img data-src="проєкти/work_8" alt="Проєкт 8"></div>
+        <div class="proj w12"><img data-src="проєкти/work_12" alt="Проєкт 12"></div>
+        <div class="proj w18"><img data-src="проєкти/work_18" alt="Проєкт 18"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- НОВЕ: про мене -->
   <section id="about">
     <div class="about-grid">
@@ -861,6 +967,21 @@ window.addEventListener('DOMContentLoaded', () => {
     speed: 0.5,
     zoom: 1.28
   });
+});
+
+// проєкти: шукає work_N з будь-яким розширенням; якщо файлу ще немає — лишається сіра заглушка
+document.querySelectorAll('.proj img[data-src]').forEach(img => {
+  const exts = ['png', 'jpg', 'jpeg', 'gif', 'webp'];
+  let k = 0;
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  img.onload = () => img.classList.add('is-loaded');
+  img.onerror = () => {
+    k++;
+    if (k < exts.length) img.src = img.dataset.src + '.' + exts[k];
+    else img.remove();
+  };
+  img.src = img.dataset.src + '.' + exts[0];
 });
 
 // мобільне меню
