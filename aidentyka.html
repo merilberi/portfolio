@@ -23,7 +23,7 @@
     --ink: #16181A;
     --muted: #63645C;
     --accent: #FF4B1F;
-    --line: #E9A79A;              /* тонкі рожеві лінії над і під банером */
+    --line: #E9A79A;              /* тонкі рожеві лінії над і під слайдером */
     --font: "Noto Sans", sans-serif;
     --script: "AnastasiaScript", "Marck Script", cursive;
   }
@@ -120,11 +120,11 @@
   .scroll-down:hover{ transform: translateY(3px); color: var(--accent); }
   .scroll-down svg{ width: 18px; height: 18px; }
 
-  /* ===== Слайдер на банері ===== */
+  /* ===== Слайдер проєктів ===== */
   .slider{
     position: relative;
     width: 100%;                 /* від краю до краю */
-    aspect-ratio: 2 / 1;         /* пропорції банера, як у макеті */
+    aspect-ratio: 2 / 1;         /* пропорції блоку зі слайдами */
     max-height: 85vh;
     min-height: 420px;
     overflow: hidden;
@@ -134,7 +134,7 @@
   }
   .slider__stage{
     position: absolute;
-    inset: 6% 0;                 /* відступ фото проєкту від верху й низу банера */
+    inset: 6% 0;                 /* відступ фото проєкту від верху й низу блоку */
   }
   .slide{
     position: absolute;
@@ -148,15 +148,6 @@
     transition: opacity .5s ease;
   }
   .slide.is-active{ opacity: 1; }
-
-  /* банер — на всю ширину, від краю до краю */
-  .slide--banner{
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    max-width: none;
-    object-fit: cover;
-    transform: none;
-  }
 
   .slider__btn{
     position: absolute;
@@ -172,41 +163,26 @@
     transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
   }
   .slider__btn svg{ width: 45%; height: 45%; }
+  /* помаранчеві стрілки, як у макеті */
   .slider__btn--prev{
     left: 8%;
-    border: 1.5px solid #fff;
+    border: 1.5px solid var(--accent);
     background: transparent;
-    color: #fff;
+    color: var(--accent);
   }
   .slider__btn--next{
     right: 8%;
-    border: 1.5px solid #fff;
-    background: #fff;
-    color: var(--ink);
+    border: 1.5px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
   }
   .slider__btn:hover{
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-  }
-
-  /* на фото проєктів (світлий фон) стрілки помаранчеві, як у макеті */
-  .slider:not(.on-banner) .slider__btn--prev{
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-  .slider:not(.on-banner) .slider__btn--next{
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-  }
-  .slider:not(.on-banner) .slider__btn:hover{
     background: #B23000;
     border-color: #B23000;
     color: #fff;
   }
 
-  .after-space{ height: 140px; } /* порожнє місце під банером */
+  .after-space{ height: 140px; } /* порожнє місце під слайдером */
 
   @media (max-width: 600px){
     .bar{ top: 12px; left: 12px; right: 12px; }
@@ -238,13 +214,10 @@
     </a>
   </section>
 
-  <section class="slider on-banner" id="slider" aria-roledescription="carousel" aria-label="Проєкти айдентики">
-    <!-- перший слайд: банер на всю ширину -->
-    <img class="slide slide--banner is-active" src="images/menu_a_0_baner.png" alt="Айдентика: Борщі &amp; Пляцки" fetchpriority="high" decoding="async">
-
-    <!-- далі фото проєктів по центру. Щоб додати ще одне — скопіюй рядок <img class="slide"...> -->
+  <section class="slider" id="slider" aria-roledescription="carousel" aria-label="Проєкти айдентики">
+    <!-- фото проєктів по центру. Щоб додати ще одне — скопіюй рядок <img class="slide"...> -->
     <div class="slider__stage">
-      <img class="slide" src="images/menu_a_1.png" alt="Айдентика, проєкт 1" decoding="async">
+      <img class="slide is-active" src="images/menu_a_1.png" alt="Айдентика, проєкт 1" fetchpriority="high" decoding="async">
       <img class="slide" src="images/menu_a_2.png" alt="Айдентика, проєкт 2" decoding="async">
       <img class="slide" src="images/menu_a_3.png" alt="Айдентика, проєкт 3" decoding="async">
       <img class="slide" src="images/menu_a_4.png" alt="Айдентика, проєкт 4" decoding="async">
@@ -282,7 +255,6 @@
       i = (n + slides.length) % slides.length;   /* по колу: після 6-го знову 1-й */
       slides[i].classList.add("is-active");
       slides[i].removeAttribute("aria-hidden");
-      slider.classList.toggle("on-banner", i === 0);   /* 0 — це банер */
     }
 
     prev.addEventListener("click", function(){ show(i - 1); });
