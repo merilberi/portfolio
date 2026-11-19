@@ -13,7 +13,8 @@
   /* Шрифт для напису «Проєкти». Файл має лежати в папці fonts/ поруч із цією сторінкою */
   @font-face{
     font-family: "AnastasiaScript";
-    src: url("fonts/AnastasiaScript.ttf") format("truetype");
+    src: url("fonts/AnastasiaScript.woff2") format("woff2"),   /* легший файл, вантажиться швидше */
+         url("fonts/AnastasiaScript.ttf") format("truetype");  /* запасний для старих браузерів */
     font-weight: 400;
     font-style: normal;
     font-display: swap;
