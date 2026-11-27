@@ -35,6 +35,17 @@
     *{ animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
   }
 
+  /* ИСПРАВЛЕНО: прибирає горизонтальний «виліт» сторінки вправо.
+     Закрита бокова панель меню стоїть за правим краєм екрана,
+     і через неї телефон вважав сторінку ширшою за екран. */
+  html, body{
+    max-width: 100%;
+    overflow-x: hidden;        /* запасний варіант для старих браузерів */
+  }
+  @supports (overflow: clip){
+    html, body{ overflow-x: clip; }  /* не створює скрол-контейнер, sticky-шапка працює */
+  }
+
   body {
     margin: 0;
     background: transparent !important; /* прозорість, щоб хмари було видно */
@@ -88,6 +99,7 @@
     background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(5px);
     border-bottom: none;
+    overflow-x: clip;   /* ИСПРАВЛЕНО: закрита панель меню більше не розширює сторінку */
   }
   .nav{
     display: flex;
@@ -491,23 +503,32 @@
 
 @media (max-width: 760px){
   #work{ padding: 40px 0; }
-  /* мобільна версія: роботи одна під одною в шаховому порядку (зліва / справа) */
+  /* мобільна версія: роботи в один рядок, гортаються по горизонталі */
   .collage{
     width: 100%;
     margin: 0;
     aspect-ratio: auto;
     display: flex;
-    flex-direction: column;
-    gap: 20px;               /* відстань між роботами */
-    padding: 0 20px;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;                          /* відстань між роботами */
+    padding: 20px;                      /* запас, щоб тінь і збільшення при наведенні не обрізались */
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;      /* робота «чіпляється» до краю при гортанні */
+    scroll-padding: 0 20px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
+  .collage::-webkit-scrollbar{ display: none; }
   .collage__item{
     position: relative;
     left: auto; top: auto;
-    width: 64%;              /* ширина кожної роботи */
+    flex: none;
+    width: 68vw;                        /* ширина кожної роботи */
+    max-width: 340px;
+    scroll-snap-align: start;
   }
-  .collage__item:nth-child(odd){ align-self: flex-start; }  /* 1-ша, 3-тя — зліва */
-  .collage__item:nth-child(even){ align-self: flex-end; }   /* 2-га, 4-та — справа */
 }
 
 /* =====================================================
@@ -583,6 +604,70 @@
   .proj-grid{ display: block; columns: 2; column-gap: var(--gap); }
   .proj-col{ display: contents; }
   .proj{ break-inside: avoid; margin-bottom: var(--gap); }
+}
+
+/* =====================================================
+   НОВЕ: збільшення робіт по кліку (lightbox)
+   ===================================================== */
+.proj{ cursor: zoom-in; }
+html.lb-open{ overflow: hidden !important; }
+.lightbox{
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(22,24,26,.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s ease, visibility 0s linear .3s;
+}
+.lightbox.is-open{
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .3s ease, visibility 0s;
+}
+.lightbox__img{
+  display: block;
+  max-width: min(92vw, 1400px);
+  max-height: 88vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: clamp(8px, 1.2vw, 16px);
+  box-shadow: 0 30px 80px rgba(0,0,0,.45);
+  transform: scale(.94);
+  transition: transform .35s cubic-bezier(.2,.8,.2,1);
+}
+.lightbox.is-open .lightbox__img{ transform: scale(1); }
+.lightbox__btn{
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 48px; height: 48px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,.9);
+  color: #111;
+  font-size: 26px;
+  line-height: 1;
+  transition: transform .2s ease, background .2s ease;
+}
+.lightbox__btn:hover{ background: #fff; transform: scale(1.08); }
+.lightbox__close{ top: 20px; right: 20px; }
+.lightbox__prev{ left: 20px; top: 50%; margin-top: -24px; }
+.lightbox__next{ right: 20px; top: 50%; margin-top: -24px; }
+@media (max-width: 600px){
+  .lightbox{ padding: 12px; }
+  .lightbox__btn{ width: 42px; height: 42px; font-size: 22px; }
+  .lightbox__close{ top: 12px; right: 12px; }
+  .lightbox__prev{ left: 8px; }
+  .lightbox__next{ right: 8px; }
 }
 
 /* =====================================================
@@ -701,7 +786,8 @@
       "tools"
       "photo";
   }
-  .about-title{ margin: 0 20px 28px; font-size: 3.4rem; }
+  /* ИСПРАВЛЕНО: заголовок не вилазить за екран на вузьких телефонах */
+  .about-title{ margin: 0 20px 28px; font-size: clamp(2rem, 12vw, 3.4rem); white-space: normal; }
   .about-text{ padding: 0 20px 40px; width: auto; font-size: 1rem; line-height: 1.4; }
   .about-tools{ padding: 0 20px 48px; margin-top: 0; }
   .tools-label{ font-size: 1.1rem; margin-bottom: 18px; }
@@ -949,9 +1035,17 @@
   <div>© 2026</div>
 </footer>
 
+<!-- НОВЕ: збільшена робота (lightbox) -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Перегляд роботи">
+  <button class="lightbox__btn lightbox__close" type="button" aria-label="Закрити">&times;</button>
+  <button class="lightbox__btn lightbox__prev" type="button" aria-label="Попередня робота">&#8249;</button>
+  <img class="lightbox__img" id="lightbox-img" alt="">
+  <button class="lightbox__btn lightbox__next" type="button" aria-label="Наступна робота">&#8250;</button>
+</div>
+
 <!-- Three.js та Vanta.js (Fog) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.fog.min.js"></script>
 <script>
 window.addEventListener('DOMContentLoaded', () => {
   VANTA.FOG({
@@ -985,6 +1079,81 @@ document.querySelectorAll('.proj img[data-src]').forEach(img => {
   };
   img.src = img.dataset.src + '.' + exts[0];
 });
+
+// lightbox: клік на роботу відкриває її збільшеною
+(function () {
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  const btnClose = lb.querySelector('.lightbox__close');
+  const btnPrev = lb.querySelector('.lightbox__prev');
+  const btnNext = lb.querySelector('.lightbox__next');
+  let current = -1;
+  let lastFocus = null;
+
+  // беремо лише ті картки, де картинка справді завантажилась
+  const loaded = () => Array.from(document.querySelectorAll('.proj img.is-loaded'));
+
+  function show(i) {
+    const list = loaded();
+    if (!list.length) return;
+    current = (i + list.length) % list.length;
+    const img = list[current];
+    lbImg.src = img.currentSrc || img.src;
+    lbImg.alt = img.alt;
+    const many = list.length > 1;
+    btnPrev.style.display = btnNext.style.display = many ? '' : 'none';
+  }
+  function open(i) {
+    lastFocus = document.activeElement;
+    show(i);
+    lb.classList.add('is-open');
+    document.documentElement.classList.add('lb-open');
+    btnClose.focus();
+  }
+  function close() {
+    lb.classList.remove('is-open');
+    document.documentElement.classList.remove('lb-open');
+    current = -1;
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  document.querySelectorAll('.proj').forEach(card => {
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+    const act = () => {
+      const img = card.querySelector('img.is-loaded');
+      if (!img) return;            // картинки ще нема — нічого відкривати
+      open(loaded().indexOf(img));
+    };
+    card.addEventListener('click', act);
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act(); }
+    });
+  });
+
+  btnClose.addEventListener('click', close);
+  btnPrev.addEventListener('click', e => { e.stopPropagation(); show(current - 1); });
+  btnNext.addEventListener('click', e => { e.stopPropagation(); show(current + 1); });
+  // клік повз картинку закриває
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('is-open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') show(current - 1);
+    else if (e.key === 'ArrowRight') show(current + 1);
+  });
+
+  // свайп на телефоні
+  let startX = null;
+  lb.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    if (startX === null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    startX = null;
+    if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
+  });
+})();
 
 // мобільне меню
 const toggle = document.querySelector('.nav-toggle');
